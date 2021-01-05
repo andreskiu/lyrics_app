@@ -24,6 +24,26 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Providers state management
+  provider: ^4.3.2+2
+
+  # Funcional programing
+  dartz: ^0.9.2
+
+  # For inmutable objets
+  equatable: ^1.2.5
+
+  # For Dependency injection
+  get_it: ^5.0.1
+
+  # For Dependency injection
+  injectable: ^1.0.5
+
+  # For HTTP requests
+  dio: ^3.0.10
+  
+  # For custom static code analysis
+  pedantic: ^1.9.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
