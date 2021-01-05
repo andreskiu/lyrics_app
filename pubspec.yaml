@@ -53,6 +53,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # A build system for Dart code generation and modular compilation.
+  build_runner: ^1.10.11
+ 
+  # Injectable is a convenient code generator for get_it.
+  injectable_generator: ^1.0.6
+
+  # A mock framework inspired by Mockito.
+  mockito: ^4.1.3
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
