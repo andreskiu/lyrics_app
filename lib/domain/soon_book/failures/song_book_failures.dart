@@ -46,7 +46,7 @@ enum SongBookFailureTypes {
 }
 
 class SongBookFailureManager {
-  ErrorContent getPasscodeErrorContent(SongBookFailure failure) {
+  ErrorContent getSongBookErrorContent(SongBookFailure failure) {
     var _msg = "";
     var _mustBeTranslated = true;
     var _errorCode = 0;
@@ -57,7 +57,7 @@ class SongBookFailureManager {
         break;
 
       case SongBookFailureTypes.Empty:
-        _msg = "songBook.pages.search.errors.invalidParams";
+        _msg = "songBook.pages.search.errors.empty";
         break;
 
       case SongBookFailureTypes.NotFound:

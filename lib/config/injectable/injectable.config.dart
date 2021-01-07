@@ -7,6 +7,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/soon_book/usecases/get_history_use_case.dart';
 import '../../domain/soon_book/usecases/get_lyrics_use_case.dart';
 import '../../domain/soon_book/services/song_book_services.dart';
 import '../../infrastructure/song_book/services/song_book_service_impl.dart';
@@ -22,9 +23,12 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.lazySingleton<SongBookService>(() => SongBookServiceImpl());
+  gh.lazySingleton<GetHistoryUseCase>(
+      () => GetHistoryUseCase(get<SongBookService>()));
   gh.lazySingleton<GetLyricsUseCase>(
       () => GetLyricsUseCase(get<SongBookService>()));
-  gh.lazySingleton<SongBookState>(
-      () => SongBookState(getLyricsUseCase: get<GetLyricsUseCase>()));
+  gh.lazySingleton<SongBookState>(() => SongBookState(
+      getLyricsUseCase: get<GetLyricsUseCase>(),
+      getHistoryUseCase: get<GetHistoryUseCase>()));
   return get;
 }
