@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import '../../../infrastructure/core/failures/server_failures.dart';
 import '../song_book_objects/song_book_objects.dart';
 import '../../core/use_case.dart';
 import '../failures/song_book_failures.dart';
@@ -22,16 +23,25 @@ class GetLyricsUseCase extends UseCase<Song, GetLyricsParams> {
       return Left(SongBookFailure.invalidParams());
     }
 
-    final result = await service.getLyrics();
+    final result = await service.getLyrics(
+      getSongDataModel: params.toGetSongDataModel(),
+    );
 
     return result.fold(
-      (l) => Left(
-        SongBookFailure(
-          type: SongBookFailureTypes.ServerError,
-          details: l.details,
-        ),
-      ),
-      (r) => Right(r),
+      (fail) {
+
+        if (fail.type == ServerFailureTypes.NotFound) {
+          return Left(SongBookFailure.notFound());
+        }
+
+        return Left(
+          SongBookFailure(
+            type: SongBookFailureTypes.ServerError,
+            details: fail.details,
+          ),
+        );
+      },
+      (song) => Right(song),
     );
   }
 }
@@ -47,6 +57,13 @@ class GetLyricsParams extends Equatable {
 
   bool areValid() {
     return artistName.isValid() && songName.isValid();
+  }
+
+  GetSongDataModel toGetSongDataModel() {
+    return GetSongDataModel(
+      artist: artistName.getValue(),
+      song: songName.getValue(),
+    );
   }
 
   @override
