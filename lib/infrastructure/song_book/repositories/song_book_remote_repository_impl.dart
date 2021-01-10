@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import '../../core/api/dio_error_manager.dart';
 import '../../core/api/api.dart';
-import '../../../domain/soon_book/models/artist.dart';
-import '../../../domain/soon_book/services/song_book_services.dart';
-import '../../../domain/soon_book/models/song.dart';
+import '../../../domain/song_book/models/artist.dart';
+import '../../../domain/song_book/services/song_book_services.dart';
+import '../../../domain/song_book/models/song.dart';
 import '../../core/failures/server_failures.dart';
 import '../interfaces/i_song_book_remote_repository.dart';
 

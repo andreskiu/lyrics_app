@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/soon_book/services/song_book_services.dart';
+import '../../../domain/song_book/services/song_book_services.dart';
 
 class GetSongLyricsReq extends Equatable {
   final String artist;

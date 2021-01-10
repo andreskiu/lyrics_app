@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '../../../config/localizations/app_localizations.dart';
-import '../../../domain/soon_book/models/song.dart';
+import '../../../domain/song_book/models/song.dart';
 import '../../../application/song_book/history_state.dart.dart';
 import 'package:provider/provider.dart';
 

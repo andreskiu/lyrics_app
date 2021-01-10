@@ -4,8 +4,8 @@ import 'package:injectable/injectable.dart';
 import '../interfaces/i_song_book_local_repository.dart';
 import '../interfaces/i_song_book_remote_repository.dart';
 
-import '../../../domain/soon_book/models/song.dart';
-import '../../../domain/soon_book/services/song_book_services.dart';
+import '../../../domain/song_book/models/song.dart';
+import '../../../domain/song_book/services/song_book_services.dart';
 import '../../core/failures/server_failures.dart';
 
 @LazySingleton(as: SongBookService)
@@ -45,7 +45,7 @@ class SongBookServiceImpl implements SongBookService {
     if (_songFromServerOrFailure.isRight()) {
       final _songFound = _songFromServerOrFailure.getOrElse(() => null);
       await _recordSongFound(localStorage, _songFound);
-      
+
       final _historyUpdated = await localStorage.getHistory();
       await _sincronizeMemory(_historyUpdated.getOrElse(() => null));
     }

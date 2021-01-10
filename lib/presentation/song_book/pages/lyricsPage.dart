@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../domain/soon_book/models/song.dart';
+import '../../../domain/song_book/models/song.dart';
 
 class LyricsPage extends StatelessWidget {
   @override

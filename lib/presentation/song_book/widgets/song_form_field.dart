@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../config/localizations/app_localizations.dart';
-import '../../../domain/soon_book/failures/song_book_failures.dart';
-import '../../../domain/soon_book/song_book_objects/song_book_objects.dart';
+import '../../../domain/song_book/failures/song_book_failures.dart';
+import '../../../domain/song_book/song_book_objects/song_book_objects.dart';
 import '../../core/form_field/formFields.dart';
 
 class SongNameFormField extends StatelessWidget with SongBookFailureManager {

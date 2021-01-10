@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/widgets/buttons/primary_button.dart';
 import '../../../config/localizations/app_localizations.dart';
-import '../../../domain/soon_book/models/song.dart';
-import '../../../domain/soon_book/song_book_objects/song_book_objects.dart';
+import '../../../domain/song_book/models/song.dart';
+import '../../../domain/song_book/song_book_objects/song_book_objects.dart';
 import '../widgets/artist_form_field.dart';
 import '../widgets/song_form_field.dart';
 import '../../../application/song_book/song_book_state.dart';

@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import '../../domain/soon_book/failures/song_book_failures.dart';
+import '../../domain/song_book/failures/song_book_failures.dart';
 import '../../domain/core/failures.dart';
 import '../../domain/core/use_case.dart';
-import '../../domain/soon_book/models/song.dart';
-import '../../domain/soon_book/song_book_objects/song_book_objects.dart';
-import '../../domain/soon_book/usecases/get_history_use_case.dart';
+import '../../domain/song_book/models/song.dart';
+import '../../domain/song_book/song_book_objects/song_book_objects.dart';
+import '../../domain/song_book/usecases/get_history_use_case.dart';
 
-import '../../domain/soon_book/usecases/get_lyrics_use_case.dart';
+import '../../domain/song_book/usecases/get_lyrics_use_case.dart';
 
 @lazySingleton
 class SongBookState extends ChangeNotifier with SongBookFailureManager {

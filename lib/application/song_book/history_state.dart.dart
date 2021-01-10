@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import '../../domain/soon_book/models/song.dart';
-import '../../domain/soon_book/song_book_objects/song_book_objects.dart';
-import '../../domain/soon_book/usecases/get_lyrics_use_case.dart';
+import '../../domain/song_book/models/song.dart';
+import '../../domain/song_book/song_book_objects/song_book_objects.dart';
+import '../../domain/song_book/usecases/get_lyrics_use_case.dart';
 import '../../domain/core/failures.dart';
 import '../../domain/core/use_case.dart';
-import '../../domain/soon_book/usecases/get_history_use_case.dart';
+import '../../domain/song_book/usecases/get_history_use_case.dart';
 
 @injectable
 class HistoryState extends ChangeNotifier {
