@@ -19,11 +19,53 @@ class ServerFailure extends Failure<ServerFailureTypes> with EquatableMixin {
         type,
         details,
       ];
-  factory ServerFailure.cacheError() {
-    return ServerFailure(type: ServerFailureTypes.Cache);
+  factory ServerFailure.cacheError({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.Cache,
+      details: details,
+    );
   }
-  factory ServerFailure.notFound() {
-    return ServerFailure(type: ServerFailureTypes.NotFound);
+  factory ServerFailure.notFound({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.NotFound,
+      details: details,
+    );
+  }
+  factory ServerFailure.connectionError({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.ConnectionError,
+      details: details,
+    );
+  }
+  factory ServerFailure.badRequest({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.BadRequest,
+      details: details,
+    );
+  }
+  factory ServerFailure.timeOut({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.TimeOut,
+      details: details,
+    );
+  }
+  factory ServerFailure.unauthorized({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.Unauthorized,
+      details: details,
+    );
+  }
+  factory ServerFailure.general({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.General,
+      details: details,
+    );
+  }
+  factory ServerFailure.formatFailure({ErrorContent details}) {
+    return ServerFailure(
+      type: ServerFailureTypes.FormatFailure,
+      details: details,
+    );
   }
 }
 
@@ -32,8 +74,10 @@ enum ServerFailureTypes {
   BadRequest,
   Unauthorized,
   NotFound,
+  FormatFailure,
   TimeOut,
   Cache,
+  General
 }
 
 class ServerFailureManager {
@@ -74,6 +118,3 @@ class ServerFailureManager {
     );
   }
 }
-
-
-

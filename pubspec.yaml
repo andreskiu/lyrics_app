@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations: # Add this line
+    sdk: flutter   
+
   # Providers state management
   provider: ^4.3.2+2
 
@@ -77,7 +80,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+      - assets/lang/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

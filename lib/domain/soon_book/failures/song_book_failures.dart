@@ -19,11 +19,15 @@ class SongBookFailure extends Failure<SongBookFailureTypes>
       ];
 
   factory SongBookFailure.notFound() {
-    return SongBookFailure(type: SongBookFailureTypes.NotFound);
+    return SongBookFailure(type: SongBookFailureTypes.SongNotFound);
   }
 
-  factory SongBookFailure.empty() {
-    return SongBookFailure(type: SongBookFailureTypes.Empty);
+  factory SongBookFailure.emptyArtist() {
+    return SongBookFailure(type: SongBookFailureTypes.EmptyArtist);
+  }
+
+  factory SongBookFailure.emptySongTitle() {
+    return SongBookFailure(type: SongBookFailureTypes.EmptySongTitle);
   }
 
   factory SongBookFailure.invalidParams() {
@@ -39,8 +43,9 @@ class SongBookFailure extends Failure<SongBookFailureTypes>
 }
 
 enum SongBookFailureTypes {
-  Empty,
-  NotFound,
+  EmptyArtist,
+  EmptySongTitle,
+  SongNotFound,
   InvalidParams,
   ServerError,
 }
@@ -53,19 +58,23 @@ class SongBookFailureManager {
 
     switch (failure.type) {
       case SongBookFailureTypes.InvalidParams:
-        _msg = "songBook.pages.search.errors.invalidParams";
+        _msg = "song_book.pages.search.errors.invalidParams";
         break;
 
-      case SongBookFailureTypes.Empty:
-        _msg = "songBook.pages.search.errors.empty";
+      case SongBookFailureTypes.EmptyArtist:
+        _msg = "song_book.fields.artist.errors.empty";
         break;
 
-      case SongBookFailureTypes.NotFound:
-        _msg = "songBook.pages.search.errors.notFound";
+      case SongBookFailureTypes.EmptySongTitle:
+        _msg = "song_book.fields.song.errors.empty";
+        break;
+
+      case SongBookFailureTypes.SongNotFound:
+        _msg = "song_book.pages.search.errors.song_not_found";
         break;
 
       case SongBookFailureTypes.ServerError:
-        return failure.details;
+        _msg = "song_book.pages.search.errors.server_error";
         break;
     }
 

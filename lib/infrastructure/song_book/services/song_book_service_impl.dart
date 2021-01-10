@@ -34,7 +34,7 @@ class SongBookServiceImpl implements SongBookService {
 
     final _songFromCacheOrFailure =
         await localStorage.getSong(getSongDataModel: getSongDataModel);
-    if (_songFromMemoryOrFailure.isRight()) {
+    if (_songFromCacheOrFailure.isRight()) {
       //song found in local cache, no need to update cache
       return _songFromCacheOrFailure;
     }
@@ -44,10 +44,10 @@ class SongBookServiceImpl implements SongBookService {
 
     if (_songFromServerOrFailure.isRight()) {
       final _songFound = _songFromServerOrFailure.getOrElse(() => null);
-      await Future.wait([
-        _recordSongFound(memory, _songFound),
-        _recordSongFound(localStorage, _songFound),
-      ]);
+      await _recordSongFound(localStorage, _songFound);
+      
+      final _historyUpdated = await localStorage.getHistory();
+      await _sincronizeMemory(_historyUpdated.getOrElse(() => null));
     }
     return _songFromServerOrFailure;
   }
@@ -60,6 +60,15 @@ class SongBookServiceImpl implements SongBookService {
       repo.saveSong(song: song),
       repo.addToHistory(song: song),
     ]);
+  }
+
+  Future<void> _sincronizeMemory(List<Song> otherHistory) async {
+    await memory.clearHistory();
+
+    final _addAllToHistoryWork =
+        otherHistory.map((song) => memory.addToHistory(song: song)).toList();
+
+    await Future.wait(_addAllToHistoryWork);
   }
 
   @override
@@ -75,13 +84,8 @@ class SongBookServiceImpl implements SongBookService {
     final _historyFromCacheOrFailure = await localStorage.getHistory();
 
     if (_historyFromCacheOrFailure.isRight()) {
-      await memory.clearHistory();
       final _historyFound = _historyFromCacheOrFailure.getOrElse(() => null);
-
-      final _addAllToHistoryWork =
-          _historyFound.map((song) => memory.addToHistory(song: song)).toList();
-
-      await Future.wait(_addAllToHistoryWork);
+      await _sincronizeMemory(_historyFound);
     }
     return _historyFromCacheOrFailure;
   }

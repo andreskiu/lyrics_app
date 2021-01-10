@@ -1,0 +1,42 @@
+{
+    "song_book":{
+        "pages":{
+            "search":{
+                "buttons":{
+                    "search": "Buscar"
+                },
+                "errors": {
+                    "song_not_found":"¡Lo sentimos! No pudimos encontrar esta canción. Intenta con otra",
+                    "server_error": "Ocurrió un error con el servidor, por favor verifica tu conexion a internet"
+                },
+                "labels":{
+                    "title": "Canta tu canción favorita!",
+                    "previous_search": "Búsqueda previa",
+                    "suggest": "Intentaste con ´Adventure of a Lifetime´ de ´Coldplay´?"
+                }
+            },
+            "history":{
+                "buttons":{
+                    "search": "Historial"
+                },
+                "labels": {
+                    "history_empty": "Tu historial esta vacio. ¡Animate y encontra tu canción favorita!"
+                }
+            }
+        },
+        "fields":{
+            "artist":{
+                "label": "Artista",
+                "errors":{
+                    "empty":"Por favor seleccione un artista"
+                }
+            },
+            "song":{
+                "label": "Canción",
+                "errors":{
+                    "empty":"Por favor seleccione una cancion"
+                }
+            }
+        }
+    }
+}

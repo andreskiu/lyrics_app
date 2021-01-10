@@ -21,15 +21,17 @@ class SongBookLocalStorageRepositoryImpl
   Future<Either<ServerFailure, Song>> getSong({
     @required GetSongDataModel getSongDataModel,
   }) async {
-    print("BUSCANDO CANCION DESDE CACHE");
     try {
-      final _songJson = sharedPreferences.getString(Last_song_key);
-      final _song = Song.fromJson(_songJson);
+      final _actualHistory = await _getHistory();
+      final _songFound = _actualHistory.firstWhere(
+        (storedSong) =>
+            getSongDataModel.artist == storedSong.artist.name &&
+            getSongDataModel.song == storedSong.name,
+        orElse: () => null,
+      );
 
-      if (getSongDataModel.artist == _song.artist.name &&
-          getSongDataModel.song == _song.name) {
-            print("RECUPERANDO CANCION DESDE CACHE");
-        return Right(_song);
+      if (_songFound != null) {
+        return Right(_songFound);
       }
       return Left(ServerFailure.notFound());
     } catch (e) {
@@ -83,15 +85,15 @@ class SongBookLocalStorageRepositoryImpl
 
   Future<List<Song>> _getHistory() async {
     final _historyJson = sharedPreferences.getStringList(History_key);
-    var _history = _historyJson.map((song) => Song.fromJson(song)).toList();
-    if (_history == null) {
-      _history = await _initializeHistory();
+    if (_historyJson == null) {
+      await _initializeHistory();
+      return [];
     }
-    return _history;
+    return _historyJson.map((song) => Song.fromJson(song)).toList();
   }
 
-  Future<List<Song>> _initializeHistory() async {
-    final _emptyList = [];
+  Future<List<String>> _initializeHistory() async {
+    final _emptyList = <String>[];
     await sharedPreferences.setStringList(History_key, _emptyList);
     return _emptyList;
   }

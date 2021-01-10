@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import '../../domain/soon_book/failures/song_book_failures.dart';
 import '../../domain/core/failures.dart';
 import '../../domain/core/use_case.dart';
 import '../../domain/soon_book/models/song.dart';
@@ -9,7 +10,7 @@ import '../../domain/soon_book/usecases/get_history_use_case.dart';
 import '../../domain/soon_book/usecases/get_lyrics_use_case.dart';
 
 @lazySingleton
-class SongBookState extends ChangeNotifier {
+class SongBookState extends ChangeNotifier with SongBookFailureManager {
   SongBookState({
     @required this.getLyricsUseCase,
     @required this.getHistoryUseCase,
@@ -27,7 +28,7 @@ class SongBookState extends ChangeNotifier {
   FieldSongName fieldSongName;
 
   Song lastSong;
-  bool getLyricsWasSuccesful = false;
+  bool isLoading = false;
   ErrorContent error;
 
   void changePage(int index) {
@@ -36,23 +37,27 @@ class SongBookState extends ChangeNotifier {
   }
 
   Future<bool> getLyrics() async {
-    getLyricsWasSuccesful = false;
-    final _params =
-        GetLyricsParams(artistName: fieldArtistName, songName: fieldSongName);
+    isLoading = true;
+    notifyListeners();
+
+    final _params = GetLyricsParams(
+      artistName: fieldArtistName,
+      songName: fieldSongName,
+    );
 
     final lyricsOrFailure = await getLyricsUseCase(_params);
 
-    getLyricsWasSuccesful = lyricsOrFailure.isRight();
     lyricsOrFailure.fold((fail) {
-      error = fail.details;
+      error = getSongBookErrorContent(fail);
     }, (song) {
       lastSong = song;
       error = null;
     });
 
+    isLoading = false;
     notifyListeners();
 
-    return getLyricsWasSuccesful;
+    return lyricsOrFailure.isRight();
   }
 
   Future<void> getHistory() async {

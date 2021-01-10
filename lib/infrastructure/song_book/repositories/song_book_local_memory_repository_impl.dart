@@ -20,11 +20,9 @@ class SongBookLocalMemoryRepositoryImpl
   Future<Either<ServerFailure, Song>> getSong({
     @required GetSongDataModel getSongDataModel,
   }) async {
-    print("BUSCANDO CANCION DESDE MEMORIA");
     if (lastSong != null &&
         getSongDataModel.artist == lastSong.artist.name &&
         getSongDataModel.song == lastSong.name) {
-      print("RECUPERANDO CANCION DESDE MEMORIA");
       return Right(lastSong);
     }
     return Left(ServerFailure.notFound());
