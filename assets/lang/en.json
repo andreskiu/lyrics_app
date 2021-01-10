@@ -32,7 +32,7 @@
                 }
             },
             "song": {
-                "label": "Canción",
+                "label": "Song",
                 "errors": {
                     "empty": "Please enter a song title"
                 }
