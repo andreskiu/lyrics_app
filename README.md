@@ -6,7 +6,7 @@ Look for your favorite songs and sing it!
 
 This project is using DDD [(Domain Driven Design)](https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-design-principles/) with a personal slight modification in the infrastructure layer.
 
-![DDD](./assets/images/readme/DDD.SVG)
+![DDD](./assets/images/readme/DDD.png)
 
 
 ## How to use
