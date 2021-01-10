@@ -60,12 +60,6 @@ class SongBookState extends ChangeNotifier with SongBookFailureManager {
     return lyricsOrFailure.isRight();
   }
 
-  Future<void> getHistory() async {
-    final lyricsOrFailure = await getHistoryUseCase(NoParams());
-
-    lyricsOrFailure.fold((fail) => null, (song) => null);
-    notifyListeners();
-  }
 
   void setFieldsFromLatestSong() {
     fieldArtistName = FieldArtistName(lastSong.artist.name);
